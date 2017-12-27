@@ -1,0 +1,128 @@
+
+1. 关于OpenCV的命名空间
+    using namespace cv;  
+    
+    三句标配语句:
+    #include <opencv2/core/core.hpp>  
+    #include<opencv2/highgui/highgui.hpp>  
+    using namespace cv;  
+    
+2. Mat 类型
+    用于保存图像以及其他矩阵数据的数据结构.默认情况下，其尺寸为0.
+    若要指定初始尺寸,可以用以下方式调用: Mat pic(320,640,Scalar(100));(未验证)
+
+3. 图像的载入和显示
+
+    主要是三个函数:
+    imread();
+    namedWindow();
+    imshow();
+    
+    3.1 imread 函数
+    作用: 载入图像
+    原型: Mat imread(const string& filename, intflags=1 );  
+    参数: 
+            filename -- 文件名
+                Windows位图 - *.bmp, *.dib
+                JPEG文件 - *.jpeg, *.jpg, *.jpe
+                JPEG 2000文件- *.jp2
+                PNG图片 - *.png
+                便携文件格式- *.pbm, *.pgm, *.ppm
+                Sun rasters光栅文件 - *.sr, *.ras
+                TIFF 文件 - *.tiff, *.tif
+                
+                由于TIFF文件格式比较混乱,难以统一,此函数读取TIFF图片可能会失败。
+            
+            intflags -- 载入标识
+                CV_LOAD_IMAGE_UNCHANGED  =-1,   //已废置
+                CV_LOAD_IMAGE_GRAYSCALE  =0,    //单通道灰度读取
+                CV_LOAD_IMAGE_COLOR      =1,    //以3通道RGB读取
+                CV_LOAD_IMAGE_ANYDEPTH   =2,    //若图像深度为16/32,则以此深度打开,否则转换成8位图像
+                CV_LOAD_IMAGE_ANYCOLOR   =4     //颜色保持不变
+                
+                颜色配置: CV_LOAD_IMAGE_GRAYSCALE 单通道
+                          CV_LOAD_IMAGE_COLOR     三通道(默认)
+                          CV_LOAD_IMAGE_ANYCOLOR  保持不变
+                          
+                          若冲突,则采用较小的数字值
+                          
+    3.2 namedWindow 函数
+    作用: 用于创建一个窗口
+    原型: void namedWindow(const string& winname,int flags=WINDOW_AUTOSIZE );   
+    参数: 
+            winname -- 窗口名称
+    
+            flags -- 窗口标识
+                WINDOW_NORMAL   用户可以改变窗口的尺寸
+                WINDOW_AUTOSIZE 自动调整窗口大小(默认)
+                WINDOW_OPENGL   窗口创建的时候便会支持OpenGL
+            
+            
+    3.3 imshow 函数
+    作用: 在指定的窗口中显示一幅图像
+    原型: void imshow(const string& winname, InputArray mat); 
+    参数: 
+            winname -- 窗口标识名称
+    
+            mat -- 需要显示的图像
+    
+    
+4. 输出图像的文件
+
+    4.1 imwrite 函数
+    作用: 输出图像到文件
+    原型: bool imwrite(const string& filename,InputArray img, const vector<int>& params=vector<int>() );  
+    参数: 
+            filename -- 输出的文件名,需要带上后缀(否则会产生异常)
+    
+            img -- Mat类型的图像数据
+            
+            params -- 特定格式保存的参数编码,一般情况下不需要填写
+    
+    
+5. 示例
+
+#include <opencv2/core/core.hpp>  
+#include<opencv2/highgui/highgui.hpp>  
+   
+using namespace cv;  //OpenCV 名称空间
+
+int main()
+{
+
+//-----------------------------------【初级图像混合】--------------------------------------  
+//     描述：初级图像混合  
+//-----------------------------------------------------------------------------------------------  
+    //载入图像
+    Mat city= imread("city.jpg");  
+    Mat timo= imread("timo.jpg");  
+
+    //载入后先显示  
+    namedWindow("【2】原画图");  
+    imshow("【2】原画图",city);  
+   
+    namedWindow("【3】logo图");  
+    imshow("【3】logo图",timo);  
+
+    //定义一个Mat类型，用于存放，图像的ROI  
+    //注: 若以CV_LOAD_IMAGE_GRAYSCALE打开图像,则在以下语句中产生错误
+    Mat imageROI;  
+    imageROI=city(Rect(0,350,timo.cols,timo.rows)); 
+
+    //将logo加到原图上  
+    addWeighted(imageROI,0.5,timo,0.3,0.,imageROI);  
+
+    //显示结果  
+    namedWindow("【4】原画+logo图");  
+    imshow("【4】原画+logo图",city);
+
+    //输出一张jpg图片到工程目录下  
+    imwrite("提莫合成.jpg",city);  
+
+    //等待按键输入后窗口自动关闭  
+    waitKey(0);  
+}
+
+
+    
+    

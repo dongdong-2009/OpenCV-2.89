@@ -1,0 +1,79 @@
+
+1. 设定感兴趣区域——ROI(region of interest)
+
+    主要是三个函数:
+    imread();
+    namedWindow();
+    imshow();
+    
+    1.1 Rect 函数
+    作用: 表示一个矩形区域. 指定矩形的左上角坐标(构造函数的前两个参数)和矩形的长宽(构造函数的后两个参数)
+    原型: template<typename _Tp> inline Rect_<_Tp>::Rect_() : x(0), y(0), width(0), height(0) {}
+    参数: 
+            x(0) -- X轴坐标
+            
+            y(0) -- Y轴坐标
+            
+            width(0) -- 宽度
+            
+            height(0) -- 高度
+            
+    示例: imageROI=image(Rect(500,250,logo.cols,logo.rows));  
+
+    1.2 Range 函数
+    作用: 表示一个矩形区域. 从起始索引到终止索引(不包括终止索引)的一连段连续序列
+    原型: inline Range::Range(int _start, int _end) : start(_start), end(_end) {}
+    参数: 
+            _start -- 起始索引
+            
+            _end -- 终止索引
+            
+    示例: imageROI=srcImage3(Range(250,250+logoImage.rows),Range(200,200+logoImage.cols));  
+
+    
+2. 初级图像混合——线性混合操作
+    线性混合理论公式:  
+                g(x) = (1-a)f0(x) + (a)f1(x)
+    通过调整a的值(范围为0-1),来使f0(x) 和 f1(x) 具有不同的权重,从而产生画面叠化的效果
+    
+    2.1 addWeighted 函数
+    作用: 计算两个数组(图像阵列)的加权和
+    原型: void addWeighted(InputArray src1, double alpha, InputArray src2,
+                              double beta, double gamma, OutputArray dst, int dtype=-1);
+    参数: 
+            src1 -- 第一个数组(Mat)
+            
+            alpha -- src1 的比例权重
+            
+            src2 -- 第二个数组(Mat)
+            
+            beta -- src2 的比例权重
+            
+            gamma -- 一个加到权重总和上的标量值
+            
+            dtype -- 输出阵列的可选深度
+                当两个输入数组具有相同的深度时,这个参数设置为-1(默认值),即等同于src1.depth()
+            
+    
+    公式表示: dst = src1[I]*alpha+ src2[I]*beta + gamma;
+
+    示例: addWeighted(imageROI, 0.8, RainImage, (1-0.8), 0.0, imageROI);  
+
+    注: 当输出数组的深度为CV_32S时,这个函数就不适用了,这时候就会内存溢出或者算出的结果压根不对
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

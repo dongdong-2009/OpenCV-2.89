@@ -1,0 +1,128 @@
+路径: opencv\build\include\opencv2
+
+
+calib3d: Calibration(校准) + 3D.  3D校准
+这个模块主要是相机校准和三维重建相关的内容.基本的多视角几何算法,单个立体摄像头标定,物体姿态估计,立体相似性算法,3D信息的重建等等.
+
+
+contrib: Contributed(贡献)/Experimental(实验) Stuf  试验功能
+该模块包含了一些最近添加的不太稳定的可选功能,不用去多管. 2.4.8里的这个模块有新型人脸识别,立体匹配,人工视网膜模型等技术.
+
+
+core: 核心功能模块
+
+1) OpenCV基本数据结构
+
+2) 动态数据结构
+
+3) 绘图函数
+
+4) 数组操作相关函数
+
+5) 辅助功能与系统函数和宏
+
+6) 与OpenGL的互操作
+
+
+imgproc: Image Processing 图像处理
+
+1) 线性和非线性的图像滤波
+2) 图像的几何变换
+3) 其它(Miscellaneous)图像转换
+4) 直方图相关
+5) 结构分析和形状描述
+6) 运动分析和对象跟踪
+7) 特征检测
+8) 目标检测等内容
+
+
+features2d: 2D功能框架
+
+1) 特征检测和描述
+2) 特征检测器(Feature Detectors)通用接口
+3) 描述符提取器(Descriptor Extractors)通用接口
+4) 描述符匹配器(Descriptor Matchers)通用接口
+5) 通用描述符(Generic Descriptor)匹配器通用接口
+6) 关键点绘制函数和匹配功能绘制函数
+
+
+flann: Fast Library for Approximate Nearest Neighbors,高维的近似近邻快速搜索算法库
+
+1) 快速近似最近邻搜索
+
+2) 聚类
+
+
+gpu: 运用GPU加速的计算机视觉模块
+
+
+highgui: high gui, 高层GUI图形用户界面
+包含媒体的I / O输入输出,视频捕捉、图像和视频的编码解码、图形交互界面的接口等内容
+
+legacy: 已经废弃的代码库,保留下来作为向下兼容
+
+ml: Machine Learning,机器学习模块
+基本上是统计模型和分类算法
+
+1) 统计模型 (Statistical Models)
+2) 一般贝叶斯分类器 (Normal Bayes Classifier)
+3) K-近邻 (K-NearestNeighbors)
+4) 支持向量机 (Support Vector Machines)
+5) 决策树 (Decision Trees)
+6) 提升(Boosting)
+7) 梯度提高树(Gradient Boosted Trees)
+8) 随机树 (Random Trees)
+9) 超随机树 (Extremely randomized trees)
+10) 期望最大化 (Expectation Maximization)
+11) 神经网络 (Neural Networks)
+12) MLData
+
+
+nonfree: 
+一些具有专利的算法模块 ,包含特征检测和GPU相关的内容.
+
+
+objdetect: 目标检测模块
+包含Cascade Classification(级联分类)和Latent SVM这两个部分.
+
+
+ocl: OpenCL-accelerated Computer Vision
+运用OpenCL加速的计算机视觉组件模块
+
+
+photo: Computational Photography
+包含图像修复和图像去噪两部分
+
+
+stitching: images stitching
+图像拼接模块
+
+1) 拼接流水线
+2) 特点寻找和匹配图像
+3) 估计旋转
+4) 自动校准
+5) 图片歪斜
+6) 接缝估测
+7) 曝光补偿
+8) 图片混合
+
+
+superres: SuperResolution
+超分辨率技术的相关功能模块
+
+
+ts: test 测试代码
+
+
+video: 视频分析组件
+该模块包括运动估计,背景分离,对象跟踪等视频处理相关内容.
+
+
+Videostab: Video stabilization  视频稳定相关的组件
+
+
+
+
+
+
+
